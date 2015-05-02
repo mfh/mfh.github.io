@@ -1,39 +1,33 @@
-<!DOCTYPE html>
+---
+layout: default
+title: Home
+---
 
-<html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <style type="text/css">
-            body {
-                margin: 0px;
-                padding: 0px;
-                font-family: monospace;
-                font-style: normal;
-                color: black;
+<div class="posts">
+  {% for post in paginator.posts %}
+  <article class="post">
+    <h1 class="post-title">
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h1>
 
-                position: absolute;
-                top: 35%;
-                left: 35%;
-                margin-left: -50px;
-                margin-top: -50px; 
-            }
-            a {
-                text-decoration: none;
-                color: green;
-            }
-        </style>
-        <title>Muhammad Fuad Hasan</title>
-    </head>
-    <body>
-        <p><b>Welcome to my humble electronic abode!</b></p> 
-        <p>
-        Hello, this is where you find Muhammad Fuad Hasan's ordinary website. If you are<br>
-        looking for my notes or code repository, you can access them in my <a href="/notes">notes</a> or<br>
-        <a href="https://github.com/mfh">github</a> page.
-        </p>
-        <p>Thank you for visiting this page and please do not hesitate to write me at<br>
-        <a href="mailto:m@fuadhasan.org">m@fuadhasan.org</a>.</p>
-        <p>Best regards,<br><i>Muhammad Fuad Hasan</i></p><br>
-    </body>
-</html>
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
 
+    {{ post.content }}
+  </article>
+  {% endfor %}
+</div>
+
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
+  {% else %}
+    <span class="pagination-item older">Older</span>
+  {% endif %}
+  {% if paginator.previous_page %}
+    <a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
+  {% else %}
+    <span class="pagination-item newer">Newer</span>
+  {% endif %}
+</div>
