@@ -5,11 +5,11 @@ permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
-paginate:            1
+title:               Muhammad Fuad Hasan
+tagline:             Notes
+url:                 http://fuadhasan.org
 baseurl:             ""
+paginate:            1
 
 # Assets
 #
