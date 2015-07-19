@@ -1,5 +1,6 @@
-## MFH's Pages
+Simple homepage based on Jekyll.
 
-MFH personal pages forked from [poole](https://github.com/poole/poole) jekyll themes.
-
-
+TODO:
+* clean up 
+* add content
+* index format and script
