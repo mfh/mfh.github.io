@@ -46,11 +46,12 @@ small, .small {
 }
 
 a {
-  color: #09c; text-decoration: none;
+  color: #09c;
+  text-decoration: none;
 }
 
-a:hover { 
-  color: #069; 
+a:visited {
+  color: #09c;
 }
 
 h1 a { 
@@ -65,7 +66,8 @@ h1 a {
 }
 
 .m-0 { 
-  margin-top: 0; margin-bottom: 0; 
+  margin-top: 0;
+  margin-bottom: 0; 
 }
 
 .mb { 
