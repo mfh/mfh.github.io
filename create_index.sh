@@ -11,7 +11,7 @@ main() {
         title=${title##*-}
         title=${title//_/ }
         local filedate=${filename%-*}
-        filedate="${filedate:6:2}-${filedate:4:2}-${filedate:0:4}"
+        filedate=$(date -d $filedate +%d\ %b\ %Y)
         echo "    <li>$filedate -- <a href=\"/$filepath\">$title</a></li>" >> $OUTPUT
     done
     echo "</ul>" >> $OUTPUT
