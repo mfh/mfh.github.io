@@ -11,10 +11,10 @@ Example content:
 - run command "rake index" to update index file
 - commit changes to publish it
 
-**TODO**:
+**To Do**:
 * add more content
 * clean up code
 
 **Note**:
-- top anchor link in footer is disabled for a while.
+- top anchor link in footer is disabled for a while
 
