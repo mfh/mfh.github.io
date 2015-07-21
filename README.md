@@ -1,4 +1,4 @@
-### Simple webpage based on Heather (Jekyll theme) .
+**Simple webpage based on Heather (Jekyll theme)**:
 
 Content's file name format:  
 [date YYYYMMDD]-[title name]-[author name].[file type]
