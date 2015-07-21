@@ -13,6 +13,6 @@ end
 
 desc "Remove _site from directory before committing"
 task :index do
-  system "./create_index.sh && mv _content-index.html _includes/"
+  system "./create_index.sh && mv _contents-index.html _includes/"
 end
 
