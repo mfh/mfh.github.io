@@ -15,3 +15,6 @@ Example content:
 * add more content
 * clean up code
 
+**Note**:
+- top anchor link in footer is disabled for a while.
+
