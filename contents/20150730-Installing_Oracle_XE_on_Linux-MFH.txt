@@ -1,0 +1,100 @@
+Installation Oracle XE on Linux (OpenSUSE 13.2):
+
+RAM: 256 MiB minimum, 512 MiB recommended
+Disk space: 1.5 GiB minimum
+Swap space: 2048 MiB minimum
+
+- Download Oracle XE installer from Oracle website and orarun from: 
+    ftp://ftp.suse.com/pub/partners/oracle/
+    
+- Add a line to /etc/hosts:
+    127.0.0.1 <current_host_name>
+    
+- Add a listener file:
+    # mkdir /var/lock/subsys
+    # touch /var/lock/subsys/listener
+
+    - Mount shmfs
+    # mount -t tmpfs shmfs -o size=2048m /dev/shm
+    
+- Install rpm packages and its dependencies:
+    # rpm -ivh orarun-1.9-172.20.21.54.x86_64.rpm
+    # rpm -ivh oracle-xe-11.2.0-1.0.x86_64.rpm  
+
+- Configure:
+You must run '/etc/init.d/oracle-xe configure' as the root user to configure the
+database.
+    # /etc/init.d/oracle-xe configure
+    
+- Set the following env variables in ~/.bashrc or .zshrc file:
+
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+export ORACLE_SID=XE
+export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
+export ORACLE_BASE=/u01/app/oracle
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+export PATH=$ORACLE_HOME/bin:$PATH
+
+- Set tmp directory ownership:
+
+$ sudo chown -R oracle:dba /var/tmp/.oracle
+$ sudo chmod -R 755 /var/tmp/.oracle
+$ sudo chown -R oracle:dba /tmp/.oracle
+$ sudo chmod -R 755 /tmp/.oracle
+
+
+- Test start database:
+$ sudo service oracle-xe start
+
+- Check Oracle's apex:
+http://localhost:18080/apex/f?p=4950  -- homepage
+http://localhost:18080/apex/f?p=4550  -- workspace
+http://localhost:18080/apex/apex_admin -- admin
+
+
+Troubleshooting:
+
+- If you cannot access that apex webpage, try:
+$ lsnrctl status
+LSNRCTL for Linux: Version 11.2.0.2.0 - Production on 25-NOV-2014 16:35:38
+
+Copyright (c) 1991, 2011, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=EXTPROC_FOR_XE)))
+TNS-12541: TNS:no listener
+ TNS-12560: TNS:protocol adapter error
+  TNS-00511: No listener
+   Linux Error: 2: No such file or directory
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=pearl.kana.com)(PORT=1521)))
+TNS-12541: TNS:no listener
+ TNS-12560: TNS:protocol adapter error
+  TNS-00511: No listener
+   Linux Error: 111: Connection refused
+
+So try: 
+$ sudo service oracle-xe force-reload
+
+ref:
+http://www.zyxware.com/articles/2008/12/24/oracle-xe-solution-to-cannot-access-http-127-0-0-1-8080apex-errors
+
+
+- Remove oradiag_<user> directory:
+$ cd /u01/app/oracle/product/11.2.0/xe/network/admin
+$ cp samples/sqlnet.ora ./
+
+add these lines to sqlnet.ora:
+DIAG_ADR_ENABLED = OFF
+TRACE_LEVEL_CLIENT = OFF
+TRACE_DIRECTORY_CLIENT=/dev/null
+LOG_DIRECTORY_CLIENT = /dev/null
+LOG_FILE_CLIENT = /dev/null
+LOG_LEVEL_CLIENT = OFF
+
+$ rm -r oradiag_<user>
+$ sudo mkdir -p /usr/lib/log/diag/clients
+$ sudo chmod 777 /usr/lib/log/diag/clients
+
+ref:
+http://stackoverflow.com/questions/3520054/what-is-oradiag-user-folder
+http://archimedeseureka.blogspot.com/2011/08/disabling-logging-for-oracle-instant.html
+
