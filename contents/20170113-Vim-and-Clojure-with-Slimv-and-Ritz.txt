@@ -1,0 +1,29 @@
+I need a development environment for programming in Clojure, so I set up my Vim
+with Slimv which will communicate with Ritz server. Ritz is a swank server for
+running clojure in Slimv. Below is the steps to setup the environment:
+
+- Install Lein (it will also install standalone clojure).
+- Add profiles.clj file into .lein dir and install Ritz, content of profiles.clj:
+---
+{:user {:plugins [
+      [lein-ritz  "0.7.0"]
+  ]}
+---
+
+- Add this to vim's config:
+  let g:slimv_swank_clojure = '! tmux new-window -d -n REPL-RITZ "lein ritz 4005"'
+
+- In project directory add a project.clj file with content, example for helloworld project:
+---
+(defproject helloworld "1.0.0-SNAPSHOT"
+  :description "Helloworld Project"
+  :url "http://example.com/helloworld"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.8.0"]]
+  :plugins [[lein-ritz "0.7.0"]]
+  )
+---
+
+- Run Vim and type ,c to connect to Ritz server
+
