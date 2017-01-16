@@ -11,6 +11,11 @@ task :clean do
   system "rm -r _site"
 end
 
+desc "Add a file content"
+task :add do
+  system "./create_file.sh"
+end
+
 desc "Populate index file in html format"
 task :index do
   system "./create_index.sh && mv _contents-index.html _includes/"

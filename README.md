@@ -6,8 +6,8 @@ Content's file name format:
 Example content:  
 19961108-Smashing_The_Stack_for_Fun_and_Profit-Aleph_One.txt
 
-**Workflow**:
-- add new file content with appropriate file name format
+**Writing Steps**:
+- run "rake add" to add a new content with appropriate filename's format
 - run "rake submit" to commit changes
 
 **To Do**:
